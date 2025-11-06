@@ -26,3 +26,5 @@ export { CommunitySidebar } from './community/CommunitySidebar';
 // Layout Components
 export { Header } from './layout/Header';
 
+// Form Components
+export { RecipeForm } from './forms/RecipeForm';
