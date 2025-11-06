@@ -83,9 +83,9 @@ export const Header = ({ activeView, userProgress, onViewChange }: HeaderProps) 
             <Link to="/submit-recipe" className="px-6 py-2.5 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-lg font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all">
               Submit Recipe
             </Link>
-            <button className="px-6 py-2.5 bg-transparent border border-purple-400 text-purple-300 rounded-lg font-medium hover:bg-purple-500/20 hover:text-white transition-all">
-              Login
-            </button>
+            <Link to="/auth" className="px-6 py-2.5 bg-transparent border border-purple-400 text-purple-300 rounded-lg font-medium hover:bg-purple-500/20 hover:text-white transition-all">
+              Login / Register
+            </Link>
           </div>
         </div>
       </div>
