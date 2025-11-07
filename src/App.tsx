@@ -82,7 +82,6 @@ function App() {
   
           {activeView === 'community' && (
             <CommunityView
-              posts={communityPosts}
             />
           )}
         </div>

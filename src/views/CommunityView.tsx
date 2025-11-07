@@ -4,16 +4,12 @@ import { Users } from "lucide-react";
 import { CommunityPost } from "../components/community/CommunityPost";
 import { CommunitySidebar } from "../components/community/CommunitySidebar";
 import { topContributors, trendingTopics } from "../constants/community";
-import type { CommunityPost as CommunityPostType } from "../types";
 import Select from "react-select";
 
-interface CommunityViewProps {
-  posts: CommunityPostType[];
-}
 
-export const CommunityView = ({ posts: initialPosts }: CommunityViewProps) => {
+export const CommunityView = () => {
   const [postContent, setPostContent] = useState("");
-  const [posts, setPosts] = useState(initialPosts || []);
+  const [posts, setPosts] = useState<any[]>([]);
   const [userId, setUserId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [recipes, setRecipes] = useState<any[]>([]);
@@ -40,6 +36,21 @@ export const CommunityView = ({ posts: initialPosts }: CommunityViewProps) => {
       }
     };
 
+    const fetchCommunities = async () => {
+      const { data, error } = await supabase
+        .from("communities")
+        .select("*, recipes(*), profiles(*), community_comments(*), community_likes(*)")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error("Gagal ambil daftar komunitas:", error.message);
+      } else {
+        console.log("Fetched community posts:", data);
+        setPosts(data || []);
+      }
+    };
+
+    fetchCommunities()
     fetchRecipes();
   }, []);
 
@@ -80,7 +91,7 @@ export const CommunityView = ({ posts: initialPosts }: CommunityViewProps) => {
       return;
     }
 
-    setPosts((prev) => [data, ...prev]);
+    // setPosts((prev) => [data, ...prev]);
     setPostContent("");
     setSelectedRecipeId("");
   };
