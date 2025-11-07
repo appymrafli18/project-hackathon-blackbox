@@ -8,7 +8,6 @@ import { CommunityView } from './views/CommunityView';
 import { RecipeModal } from './components/recipes/RecipeModal';
 import { useBookmarks } from './hooks/useBookmarks';
 import { useLikes } from './hooks/useLikes';
-import { recipes } from './constants/recipes';
 import { challenges } from './constants/challenges';
 import { communityPosts } from './constants/community';
 import { supabase } from './lib/supabaseClient';

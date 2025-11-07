@@ -1,4 +1,3 @@
-import type { Recipe } from '../../types';
 import { Modal } from '../common/Modal';
 import { CheckCircle, Clock, Eye, Heart, Zap, GitBranch, Play, Bookmark, Share2 } from 'lucide-react';
 
