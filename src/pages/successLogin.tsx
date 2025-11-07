@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import Auth from './Auth'
 import type { Session, User } from '@supabase/supabase-js'
+import { useToast } from '../contexts/ToastContext'
 
 function App() {
   const [session, setSession] = useState<Session | null>(null)
@@ -10,6 +11,7 @@ function App() {
   const [title, setTitle] = useState('')
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null)
   const [uploading, setUploading] = useState(false)
+  const { showSuccess, showError } = useToast()
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -68,7 +70,7 @@ function App() {
   const handleAdd = async () => {
     if (!user || !title.trim()) return
     const { error } = await supabase.from('notes').insert([{ title, user_id: user.id }])
-    if (error) return alert(error.message)
+    if (error) return showError(error.message)
     setTitle('')
     const { data } = await supabase.from('notes').select('*').eq('user_id', user.id)
     setNotes(data ?? [])
@@ -102,10 +104,10 @@ function App() {
       if (updateError) throw updateError
 
       setAvatarUrl(publicUrl)
-      alert('✅ Avatar berhasil diupload!')
+      showSuccess('Avatar berhasil diupload!')
     } catch (err: any) {
       console.error('Upload error:', err.message)
-      alert('❌ ' + err.message)
+      showError(err.message)
     } finally {
       setUploading(false)
     }

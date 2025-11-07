@@ -4,6 +4,7 @@ import type { ViewType, UserProgress } from "../../types";
 import { Link } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import { supabase } from "../../lib/supabaseClient";
+import { useToast } from "../../contexts/ToastContext";
 
 interface HeaderProps {
   activeView: ViewType;
@@ -18,6 +19,7 @@ export const Header = ({
 }: HeaderProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { isAuthenticated } = useAuth();
+  const { showSuccess, showError } = useToast();
 
   const navItems: { id: ViewType; label: string }[] = [
     { id: "recipes", label: "Recipes" },
@@ -36,10 +38,10 @@ export const Header = ({
     try {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
-      alert("Anda berhasil logout!");
+      showSuccess("Anda berhasil logout!");
       window.location.reload();
     } catch (err: unknown) {
-      alert("Gagal logout.");
+      showError("Gagal logout.");
     }
   };
 

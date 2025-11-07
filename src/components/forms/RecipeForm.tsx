@@ -3,6 +3,7 @@ import Select from 'react-select';
 import { supabase } from '../../lib/supabaseClient';
 import { Send, FileText, Tag, Clock, Star, Upload } from 'lucide-react';
 import useAuth from '../../hooks/useAuth';
+import { useToast } from '../../contexts/ToastContext';
 
 export const RecipeForm = () => {
     const [formData, setFormData] = useState({
@@ -17,6 +18,7 @@ export const RecipeForm = () => {
     });
 
     const {isAuthenticated} = useAuth();
+    const { showError, showSuccess } = useToast();
 
     const [categories, setCategories] = useState<any[]>([]);
     const [difficulties, setDifficulties] = useState<any[]>([]);
@@ -51,12 +53,12 @@ export const RecipeForm = () => {
     const handleSubmit = async (e: any) => {
         e.preventDefault();
         if (!formData.title || !formData.description || formData.categoryIds.length === 0) {
-            alert('Harap isi semua field wajib!');
+            showError('Harap isi semua field wajib!');
             return;
         }
 
         if (!isAuthenticated) {
-            alert('Anda harus login terlebih dahulu untuk mengirim resep.');
+            showError('Anda harus login terlebih dahulu untuk mengirim resep.');
             return;
         }
 
@@ -125,7 +127,7 @@ export const RecipeForm = () => {
                 }
             }
 
-            alert('Resep berhasil disimpan!');
+            showSuccess('Resep berhasil disimpan!');
             window.location.href = '/';
             setFormData({
                 title: '',
@@ -138,7 +140,7 @@ export const RecipeForm = () => {
                 prompt: '',
             });
         } catch (err: any) {
-            alert(err.message ?? 'Terjadi error saat menyimpan resep');
+            showError(err.message ?? 'Terjadi error saat menyimpan resep');
         } finally {
             setLoading(false);
         }

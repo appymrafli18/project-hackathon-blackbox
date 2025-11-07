@@ -5,6 +5,7 @@ import { CommunityPost } from "../components/community/CommunityPost";
 import { CommunitySidebar } from "../components/community/CommunitySidebar";
 import { topContributors, trendingTopics } from "../constants/community";
 import Select from "react-select";
+import { useToast } from "../contexts/ToastContext";
 
 
 export const CommunityView = () => {
@@ -14,6 +15,7 @@ export const CommunityView = () => {
   const [loading, setLoading] = useState(false);
   const [recipes, setRecipes] = useState<any[]>([]);
   const [selectedRecipeId, setSelectedRecipeId] = useState<string>("");
+  const { showError, showSuccess } = useToast();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data }) => {
@@ -56,17 +58,17 @@ export const CommunityView = () => {
 
   const handlePost = async () => {
     if (!userId) {
-      alert("Kamu harus login dulu!");
+      showError("Kamu harus login dulu!");
       return;
     }
 
     if (!postContent.trim()) {
-      alert("Tulis sesuatu dulu sebelum posting.");
+      showError("Tulis sesuatu dulu sebelum posting.");
       return;
     }
 
     if (!selectedRecipeId) {
-      alert("Pilih resep yang ingin kamu komentari.");
+      showError("Pilih resep yang ingin kamu komentari.");
       return;
     }
 
@@ -87,13 +89,15 @@ export const CommunityView = () => {
 
     if (error) {
       console.error("Gagal buat post:", error.message);
-      alert(error.message);
+      showError(error.message);
       return;
     }
 
+    showSuccess("Post berhasil dibuat!");
     // setPosts((prev) => [data, ...prev]);
     setPostContent("");
     setSelectedRecipeId("");
+    window.location.reload();
   };
 
   // 🔹 Ubah daftar resep jadi opsi untuk react-select
@@ -176,19 +180,6 @@ export const CommunityView = () => {
                 }}
               />
             </div>
-            {/* <select
-              value={selectedRecipeId}
-              onChange={(e) => setSelectedRecipeId(e.target.value)}
-              className="w-full mb-3 bg-slate-900 border border-white/20 rounded-xl p-3 text-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50"
-            >
-              <option value="">Pilih resep yang ingin dikomentari</option>
-              {recipes.map((r) => (
-                <option key={r.id} value={r.id} className="text-black">
-                  {r.title}
-                </option>
-              ))}
-            </select> */}
-
             <textarea
               value={postContent}
               onChange={(e) => setPostContent(e.target.value)}

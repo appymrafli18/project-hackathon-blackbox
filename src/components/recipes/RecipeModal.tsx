@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { Modal } from "../common/Modal";
 import {
   CheckCircle,
@@ -165,10 +166,14 @@ export const RecipeModal = ({
         </div>
 
         <div className="flex flex-col sm:flex-row gap-3">
-          <button className="flex-1 py-4 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2">
+          <Link
+            target="__blank"
+            to="https://www.blackbox.ai/"
+            className="flex-1 py-4 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2 cursor-pointer"
+          >
             <Play className="w-5 h-5" />
             Try This Recipe
-          </button>
+          </Link>
           <button
             onClick={() => onBookmark(recipe.id)}
             className="px-6 py-4 bg-white/5 border border-white/10 text-white rounded-xl hover:bg-white/10 transition-all flex items-center justify-center"

@@ -2,6 +2,7 @@
 import { useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
 import { Mail, Lock, User, Loader2, LogIn, UserPlus } from 'lucide-react'
+import { useToast } from '../contexts/ToastContext'
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true)
@@ -9,16 +10,17 @@ export default function Auth() {
   const [displayName, setDisplayName] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
+  const { showSuccess, showError } = useToast()
 
   const handleLogin = async () => {
     try {
       setLoading(true)
       const { error } = await supabase.auth.signInWithPassword({ email, password })
       if (error) throw error
-      alert('✅ Berhasil login!')
+      showSuccess('Berhasil login!')
       window.location.href = "/"
     } catch (err: any) {
-      alert(err.message ?? 'Terjadi error')
+      showError(err.message ?? 'Terjadi error')
     } finally {
       setLoading(false)
     }
@@ -41,10 +43,10 @@ export default function Auth() {
       }
 
       if (error) throw error
-      alert('🎉 Akun berhasil dibuat! Cek email untuk verifikasi (jika diaktifkan).')
+      showSuccess('Akun berhasil dibuat! Cek email untuk verifikasi (jika diaktifkan).')
       window.location.reload();
     } catch (err: any) {
-      alert(err.message ?? 'Terjadi error')
+      showError(err.message ?? 'Terjadi error')
     } finally {
       setLoading(false)
     }

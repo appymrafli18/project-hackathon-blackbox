@@ -7,6 +7,7 @@ import { CategoryTabs } from '../components/recipes/CategoryTabs';
 import { RecipeGrid } from '../components/recipes/RecipeGrid';
 import { categories } from '../constants/categories';
 import { supabase } from '../lib/supabaseClient';
+import { useToast } from '../contexts/ToastContext';
 
 interface RecipesViewProps {
   recipes: any[];
@@ -32,6 +33,7 @@ export const RecipesView = ({
   onViewChange,
 }: RecipesViewProps) => {
   const [categoriesData, setCategoriesData] = useState<any[]>([]);
+  const { showInfo } = useToast();
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -156,7 +158,7 @@ export const RecipesView = ({
           </button>
           <button
             className="px-6 py-3 cursor-pointer w-full sm:w-auto bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2"
-            onClick={() => alert("Under development!")}
+            onClick={() => showInfo("Fitur ini sedang dalam pengembangan!")}
           >
             Watch Tutorial
           </button>
