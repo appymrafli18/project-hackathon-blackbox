@@ -9,7 +9,6 @@ import { RecipeModal } from './components/recipes/RecipeModal';
 import { useBookmarks } from './hooks/useBookmarks';
 import { useLikes } from './hooks/useLikes';
 import { challenges } from './constants/challenges';
-import { communityPosts } from './constants/community';
 import { supabase } from './lib/supabaseClient';
 function App() {
   const [activeTab, setActiveTab] = useState('all');
