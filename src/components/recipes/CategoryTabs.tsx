@@ -19,7 +19,7 @@ export const CategoryTabs = ({
           <button
             key={cat.id}
             onClick={() => onTabChange(cat.id)}
-            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all whitespace-nowrap ${
+            className={`flex items-center gap-2 px-5 py-3 rounded-xl font-medium transition-all cursor-pointer whitespace-nowrap ${
               activeTab === cat.id
                 ? 'bg-linear-to-r from-purple-500 to-pink-500 text-white shadow-lg shadow-purple-500/50'
                 : 'bg-white/5 text-gray-300 hover:bg-white/10 border border-white/10'

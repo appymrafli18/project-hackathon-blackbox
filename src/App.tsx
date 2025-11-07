@@ -47,7 +47,7 @@ function App() {
           onViewChange={setActiveView}
         />
   
-        <div className="max-w-7xl mx-auto px-6 py-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
           {activeView === 'recipes' && (
             <RecipesView
               recipes={recipes}

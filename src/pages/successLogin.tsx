@@ -114,49 +114,93 @@ function App() {
   if (!session) return <Auth />
 
   return (
-    <div style={{ padding: 20 }}>
-      <h1>Halo, {user?.email}</h1>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-10 px-4">
+      <div className="max-w-4xl mx-auto space-y-6">
+        <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 text-white space-y-6">
+          <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+            <div>
+              <h1 className="text-2xl sm:text-3xl font-bold">Halo, {user?.email}</h1>
+              <p className="text-sm text-purple-200">Senang melihatmu kembali! Kelola profil dan catatanmu di sini.</p>
+            </div>
+            <button
+              onClick={() => supabase.auth.signOut()}
+              className="self-start lg:self-auto px-5 py-2.5 bg-white/10 border border-white/20 rounded-xl text-sm font-medium hover:bg-white/20 transition"
+            >
+              Logout
+            </button>
+          </div>
 
-      {/* 🔹 Avatar Upload Section */}
-      <div style={{ marginTop: 20 }}>
-        <h3>Avatar</h3>
-        {avatarUrl ? (
-          <img
-            src={avatarUrl}
-            alt="Avatar"
-            style={{
-              width: 100,
-              height: 100,
-              borderRadius: '50%',
-              objectFit: 'cover',
-              border: '2px solid #ccc',
-            }}
-          />
-        ) : (
-          <p>Belum ada avatar</p>
-        )}
-        <input type="file" accept="image/*" onChange={handleUploadAvatar} disabled={uploading} />
+          <div className="grid gap-6 lg:grid-cols-[2fr_3fr]">
+            <section className="space-y-4">
+              <div>
+                <h3 className="text-lg font-semibold">Avatar</h3>
+                <p className="text-sm text-gray-300">Unggah avatar terbaikmu untuk tampil lebih profesional.</p>
+              </div>
+              {avatarUrl ? (
+                <img
+                  src={avatarUrl}
+                  alt="Avatar"
+                  className="w-28 h-28 rounded-full object-cover border-2 border-purple-400 shadow-lg"
+                />
+              ) : (
+                <div className="w-28 h-28 rounded-full border-2 border-dashed border-white/30 flex items-center justify-center text-sm text-gray-400">
+                  Belum ada avatar
+                </div>
+              )}
+              <label className="block">
+                <span className={`inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-400/40 rounded-xl text-sm text-purple-200 font-medium transition ${
+                  uploading
+                    ? "opacity-50 cursor-not-allowed"
+                    : "cursor-pointer hover:bg-purple-500/30"
+                }`}>
+                  Upload Avatar
+                </span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleUploadAvatar}
+                  disabled={uploading}
+                  className="hidden"
+                />
+              </label>
+              {uploading && <p className="text-xs text-gray-400">Mengunggah avatar...</p>}
+            </section>
+
+            <section className="space-y-4">
+              <div>
+                <h2 className="text-lg font-semibold">Tambah Catatan</h2>
+                <p className="text-sm text-gray-300">Simpan ide, catatan belajar, atau progressmu di Blackbox AI.</p>
+              </div>
+              <div className="flex flex-col sm:flex-row gap-3">
+                <input
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                  placeholder="Judul catatan"
+                  className="flex-1 rounded-xl border border-white/20 bg-white/5 px-4 py-3 text-white placeholder:text-gray-400 focus:outline-none focus:border-purple-400 focus:ring-2 focus:ring-purple-400/40"
+                />
+                <button
+                  onClick={handleAdd}
+                  className="px-5 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 font-medium hover:shadow-lg hover:shadow-purple-500/40 transition"
+                >
+                  Simpan
+                </button>
+              </div>
+              <ul className="space-y-2 max-h-64 overflow-y-auto pr-1">
+                {notes.length === 0 && (
+                  <li className="rounded-xl border border-dashed border-white/20 px-4 py-5 text-sm text-gray-400 text-center">
+                    Belum ada catatan. Tambahkan catatan pertamamu!
+                  </li>
+                )}
+                {notes.map((n) => (
+                  <li key={n.id} className="rounded-xl bg-white/5 border border-white/10 px-4 py-3 text-sm">
+                    {n.title}
+                  </li>
+                ))}
+              </ul>
+            </section>
+          </div>
+        </div>
       </div>
-
-      <button onClick={() => supabase.auth.signOut()}>Logout</button>
-
-      {/* 🔹 Notes Section */}
-      <section style={{ marginTop: 20 }}>
-        <h2>Tambah Catatan</h2>
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          placeholder="Judul"
-          style={{ marginRight: 10 }}
-        />
-        <button onClick={handleAdd}>Simpan</button>
-
-        <ul>
-          {notes.map((n) => (
-            <li key={n.id}>{n.title}</li>
-          ))}
-        </ul>
-      </section>
     </div>
   )
 }

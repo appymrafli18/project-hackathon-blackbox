@@ -40,15 +40,15 @@ export const RecipesView = ({
   return (
     <>
       {/* Hero Section */}
-      <div className="mb-12 text-center">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-300 text-sm mb-4">
+      <div className="mb-12 text-center px-2 sm:px-0">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 bg-purple-500/20 border border-purple-500/30 rounded-full text-purple-300 text-sm mb-4">
           <Zap className="w-4 h-4" />
           <span>Weekly Challenge: Build a Chrome Extension in 5 Minutes</span>
         </div>
-        <h2 className="text-5xl font-bold text-white mb-4">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4 leading-tight">
           Master AI-Powered Development
         </h2>
-        <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+        <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto">
           Koleksi resep praktis untuk memaksimalkan setiap fitur Blackbox AI
         </p>
         
@@ -61,7 +61,7 @@ export const RecipesView = ({
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 sm:gap-6 mb-8">
         <StatCard icon={Book} value="250+" label="Resep Tersedia" iconColor="text-purple-400" />
         <StatCard icon={Users} value="15K+" label="Developer Aktif" iconColor="text-blue-400" />
         <StatCard icon={CheckCircle} value="98%" label="Success Rate" iconColor="text-green-400" />
@@ -86,20 +86,20 @@ export const RecipesView = ({
       />
 
       {/* Community CTA */}
-      <div className="mt-12 bg-linear-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-8 text-center">
+      <div className="mt-12 bg-linear-to-r from-purple-500/20 to-pink-500/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl px-4 py-8 sm:p-8 text-center">
         <Users className="w-12 h-12 text-purple-400 mx-auto mb-4" />
         <h3 className="text-2xl font-bold text-white mb-2">Join Our Community</h3>
-        <p className="text-gray-300 mb-6 max-w-2xl mx-auto">
+        <p className="text-gray-300 mb-6 max-w-2xl mx-auto text-sm sm:text-base">
           Bagikan resep Anda, beri rating, dan kolaborasi dengan ribuan developer lainnya
         </p>
-        <div className="flex gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
           <button 
             onClick={() => onViewChange('community')}
-            className="px-6 py-3 bg-white/10 backdrop-blur border border-white/20 text-white rounded-xl font-medium hover:bg-white/20 transition-all"
+            className="px-6 py-3 w-full sm:w-auto bg-white/10 backdrop-blur border border-white/20 text-white rounded-xl font-medium hover:bg-white/20 transition-all"
           >
             Browse Community
           </button>
-          <button className="px-6 py-3 bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center gap-2">
+          <button className="px-6 py-3 w-full sm:w-auto bg-linear-to-r from-purple-500 to-pink-500 text-white rounded-xl font-medium hover:shadow-lg hover:shadow-purple-500/50 transition-all flex items-center justify-center gap-2">
             Watch Tutorial
           </button>
         </div>

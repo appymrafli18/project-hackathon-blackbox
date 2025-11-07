@@ -10,7 +10,7 @@ export const QuickTemplates = ({
   return (
     <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
       <h3 className="text-xl font-bold text-white mb-4">Quick Templates</h3>
-      <div className="grid md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
         {templates.map((template, idx) => (
           <button 
             key={idx}

@@ -139,10 +139,10 @@ export const RecipeForm = () => {
     }));
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center py-12 px-6">
-            <div className="max-w-3xl w-full bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-8">
+        <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 flex flex-col items-center py-12 px-4 sm:px-6">
+            <div className="max-w-3xl w-full bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 sm:p-8">
                 <h2 className="text-3xl font-bold text-white mb-6 text-center">Submit Your Recipe</h2>
-                <p className="text-gray-400 text-center mb-8">
+                <p className="text-gray-400 text-center mb-8 text-sm sm:text-base">
                     Bagikan resep AI-mu untuk membantu developer lain!
                 </p>
 

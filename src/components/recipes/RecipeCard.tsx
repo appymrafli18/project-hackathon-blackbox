@@ -20,8 +20,8 @@ export const RecipeCard = ({
   onView
 }: RecipeCardProps) => {
   return (
-    <div className="group bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/50 transition-all hover:shadow-xl hover:shadow-purple-500/20 hover:-translate-y-1">
-      <div className="flex items-start justify-between mb-3">
+    <div className="group bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-5 sm:p-6 hover:bg-white/10 hover:border-purple-500/50 transition-all hover:shadow-xl hover:shadow-purple-500/20 hover:-translate-y-1">
+      <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
         <div>
           {recipe.trending && (
             <div className="inline-flex items-center gap-1 px-3 py-1 bg-linear-to-r from-orange-500 to-pink-500 rounded-full text-white text-xs font-medium mb-2">
@@ -66,7 +66,7 @@ export const RecipeCard = ({
         ))}
       </div>
 
-      <div className="flex items-center gap-2 mb-4">
+      <div className="flex items-center gap-2 mb-4 flex-wrap">
         <span className={`px-3 py-1 rounded-full text-xs font-medium ${getDifficultyColor(recipe.difficulty)}`}>
           {recipe.difficulty}
         </span>
@@ -78,7 +78,7 @@ export const RecipeCard = ({
       </div>
 
       {/* Engagement Stats */}
-      <div className="flex items-center gap-4 mb-4 text-sm text-gray-400">
+      <div className="flex flex-wrap items-center gap-4 mb-4 text-sm text-gray-400">
         <div className="flex items-center gap-1">
           <Eye className="w-4 h-4" />
           {recipe.views}
@@ -89,7 +89,7 @@ export const RecipeCard = ({
         </div>
       </div>
 
-      <div className="flex items-center justify-between pt-4 border-t border-white/10">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-white/10">
         <div className="flex items-center gap-3">
           <button 
             onClick={() => onLike(recipe.id)}
@@ -106,7 +106,7 @@ export const RecipeCard = ({
         </div>
         <button 
           onClick={() => onView(recipe)}
-          className="flex items-center gap-1 text-purple-400 font-medium hover:gap-2 transition-all"
+          className="flex items-center gap-1 text-purple-400 font-medium hover:gap-2 transition-all cursor-pointer"
         >
           View
           <ChevronRight className="w-5 h-5" />

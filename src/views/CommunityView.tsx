@@ -86,18 +86,18 @@ export const CommunityView = ({ posts: initialPosts }: CommunityViewProps) => {
 
   return (
     <div className="space-y-6">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-full text-green-300 text-sm mb-4">
+      <div className="text-center mb-8 px-2 sm:px-0">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-full text-green-300 text-sm mb-4">
           <Users className="w-4 h-4" />
           <span>Connect with 15,000+ Developers</span>
         </div>
-        <h2 className="text-4xl font-bold text-white mb-3">Community Hub</h2>
-        <p className="text-gray-300">
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Community Hub</h2>
+        <p className="text-gray-300 text-sm sm:text-base">
           Bagikan pengalaman, komentar, dan tips dari resep yang kamu lihat
         </p>
       </div>
 
-      <div className="grid lg:grid-cols-3 gap-6">
+      <div className="grid gap-6 lg:grid-cols-3">
         {/* Feed */}
         <div className="lg:col-span-2 space-y-4">
           <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
@@ -121,7 +121,7 @@ export const CommunityView = ({ posts: initialPosts }: CommunityViewProps) => {
               className="w-full h-24 bg-slate-900 border border-white/20 rounded-xl p-4 text-white resize-none focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50 mb-3"
             />
 
-            <div className="flex justify-end">
+            <div className="flex flex-col sm:flex-row sm:justify-end gap-3">
               <button
                 onClick={handlePost}
                 disabled={loading}
