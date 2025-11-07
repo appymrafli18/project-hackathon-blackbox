@@ -114,7 +114,7 @@ function App() {
   if (!session) return <Auth />
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 py-10 px-4">
+    <div className="min-h-screen bg-linear-to-br from-slate-900 via-purple-900 to-slate-900 py-10 px-4">
       <div className="max-w-4xl mx-auto space-y-6">
         <div className="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-6 sm:p-8 text-white space-y-6">
           <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
@@ -180,7 +180,7 @@ function App() {
                 />
                 <button
                   onClick={handleAdd}
-                  className="px-5 py-3 rounded-xl bg-gradient-to-r from-purple-500 to-pink-500 font-medium hover:shadow-lg hover:shadow-purple-500/40 transition"
+                  className="px-5 py-3 rounded-xl bg-linear-to-r from-purple-500 to-pink-500 font-medium hover:shadow-lg hover:shadow-purple-500/40 transition"
                 >
                   Simpan
                 </button>

@@ -138,7 +138,12 @@ export const CommunityView = ({ posts: initialPosts }: CommunityViewProps) => {
                   }),
                   singleValue: (base) => ({
                     ...base,
-                    color: "white",
+                    color: "#d1d5db", // gray-300 untuk nilai yang dipilih
+                  }),
+                  // **Tambahan untuk warna teks saat mengetik (mencari)**
+                  input: (base) => ({
+                    ...base,
+                    color: "#d1d5db", // gray-300 untuk teks yang diketik
                   }),
                   menu: (base) => ({
                     ...base,
@@ -150,12 +155,12 @@ export const CommunityView = ({ posts: initialPosts }: CommunityViewProps) => {
                     backgroundColor: state.isFocused
                       ? "#a855f7"
                       : "transparent",
-                    color: state.isFocused ? "white" : "black",
+                    color: state.isFocused ? "white" : "#d1d5db", // gray-300 untuk opsi tidak fokus
                     cursor: "pointer",
                   }),
                   placeholder: (base) => ({
                     ...base,
-                    color: "rgba(255,255,255,0.7)",
+                    color: "#d1d5db", // gray-300 untuk placeholder
                   }),
                 }}
               />
