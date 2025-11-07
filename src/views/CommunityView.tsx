@@ -71,7 +71,7 @@ export const CommunityView = () => {
     }
 
     setLoading(true);
-    const { data, error } = await supabase
+    const { error } = await supabase
       .from("communities")
       .insert([
         {
