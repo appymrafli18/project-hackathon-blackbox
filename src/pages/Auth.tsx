@@ -30,13 +30,12 @@ export default function Auth() {
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
-        options: { data: { display_name: displayName } },
       })
 
       const user = data.user
       if (user) {
         const { error: insertError } = await supabase.from('profiles').insert([
-          { id: user.id, avatar_url: null },
+          { id: user.id, avatar_url: 'https://api.dicebear.com/7.x/initials/svg?seed=' + encodeURIComponent(displayName), display_name: displayName},
         ])
         if (insertError) throw insertError
       }

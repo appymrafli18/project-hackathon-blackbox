@@ -1,15 +1,15 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { Recipe, ViewType } from '../types';
-import { Zap } from 'lucide-react';
+import { Zap, Book, Users, CheckCircle, Sparkles } from 'lucide-react';
 import { SearchBar } from '../components/common/SearchBar';
 import { StatCard } from '../components/common/StatCard';
 import { CategoryTabs } from '../components/recipes/CategoryTabs';
 import { RecipeGrid } from '../components/recipes/RecipeGrid';
-import { Book, Users, CheckCircle, Sparkles } from 'lucide-react';
 import { categories } from '../constants/categories';
+import { supabase } from '../lib/supabaseClient';
 
 interface RecipesViewProps {
-  recipes: Recipe[];
+  recipes: any[];
   activeTab: string;
   isBookmarked: (id: number) => boolean;
   isLiked: (id: number) => boolean;
@@ -31,10 +31,44 @@ export const RecipesView = ({
   onView,
   onViewChange
 }: RecipesViewProps) => {
+  const [categoriesData, setCategoriesData] = useState<any[]>([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      const { data, error } = await supabase
+        .from('categories')
+        .select('*, recipe_categories(id)')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error('Gagal mengambil data kategori:', error.message);
+        return;
+      }
+
+      // Hitung jumlah resep per kategori
+      const withCount = (data || []).map(cat => ({
+        ...cat,
+        count: cat.recipe_categories ? cat.recipe_categories.length : 0,
+      }));
+
+      // Tambahkan kategori "All" dengan total semua resep
+      const totalCount = withCount.reduce((acc, cat) => acc + cat.count, 0);
+      const allCategory = { id: 'all', name: 'All', count: totalCount, icon: Book };
+
+      setCategoriesData([allCategory, ...withCount]);
+    };
+
+    fetchCategories();
+  }, []);
+
   const filteredRecipes = useMemo(() => {
-    return activeTab === 'all' 
-      ? recipes 
-      : recipes.filter(r => r.category === activeTab);
+    return activeTab === 'all'
+      ? recipes
+      : recipes.filter(r =>
+          r.recipe_categories
+            .map((rc: { categories: { id: any } }) => rc.categories.id)
+            .includes(activeTab)
+        );
   }, [recipes, activeTab]);
 
   return (
@@ -51,12 +85,10 @@ export const RecipesView = ({
         <p className="text-xl text-gray-300 max-w-2xl mx-auto">
           Koleksi resep praktis untuk memaksimalkan setiap fitur Blackbox AI
         </p>
-        
-        {/* Search Bar with Filters */}
+
+        {/* Search Bar */}
         <div className="max-w-2xl mx-auto mt-8">
-          <SearchBar 
-            placeholder="Cari resep berdasarkan teknologi, masalah, atau fitur..."
-          />
+          <SearchBar placeholder="Cari resep berdasarkan teknologi, masalah, atau fitur..." />
         </div>
       </div>
 
@@ -69,8 +101,8 @@ export const RecipesView = ({
       </div>
 
       {/* Category Tabs */}
-      <CategoryTabs 
-        categories={categories}
+      <CategoryTabs
+        categories={categoriesData.length > 0 ? categoriesData : categories}
         activeTab={activeTab}
         onTabChange={onTabChange}
       />
@@ -93,7 +125,7 @@ export const RecipesView = ({
           Bagikan resep Anda, beri rating, dan kolaborasi dengan ribuan developer lainnya
         </p>
         <div className="flex gap-4 justify-center">
-          <button 
+          <button
             onClick={() => onViewChange('community')}
             className="px-6 py-3 bg-white/10 backdrop-blur border border-white/20 text-white rounded-xl font-medium hover:bg-white/20 transition-all"
           >
@@ -107,4 +139,3 @@ export const RecipesView = ({
     </>
   );
 };
-

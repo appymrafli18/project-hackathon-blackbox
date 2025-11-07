@@ -20,8 +20,9 @@ export const RecipeGrid = ({
 }: RecipeGridProps) => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {recipes.map((recipe) => (
+      {recipes.map((recipe, idx) => (
         <RecipeCard
+          index={idx}
           key={recipe.id}
           recipe={recipe}
           isBookmarked={isBookmarked(recipe.id)}

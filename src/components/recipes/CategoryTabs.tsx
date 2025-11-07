@@ -1,20 +1,16 @@
-import type { Category } from '../../types';
-
-interface CategoryTabsProps {
-  categories: Category[];
-  activeTab: string;
-  onTabChange: (tabId: string) => void;
-}
+import * as Icons  from 'lucide-react';
 
 export const CategoryTabs = ({ 
   categories, 
   activeTab, 
   onTabChange 
-}: CategoryTabsProps) => {
+}: any) => {
+  console.log(categories)
   return (
     <div className="flex gap-3 mb-8 overflow-x-auto pb-2">
-      {categories.map((cat) => {
-        const Icon = cat.icon;
+      {categories.map((cat:any) => {
+        const Icon = (Icons as any)[cat.icon] || Icons.Brain;
+
         return (
           <button
             key={cat.id}

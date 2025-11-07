@@ -6,6 +6,7 @@ import { Send, FileText, Tag, Clock, Star, Upload } from 'lucide-react';
 export const RecipeForm = () => {
     const [formData, setFormData] = useState({
         title: '',
+        prompt: '',
         categoryIds: [] as string[],
         difficultyId: '',
         toolId: '',
@@ -59,6 +60,7 @@ export const RecipeForm = () => {
                 .insert([
                     {
                         title: formData.title,
+                        prompt: formData.prompt,
                         description: formData.description,
                         estimation: Number(formData.time) || 1,
                         difficulty_id: formData.difficultyId || null,
@@ -116,6 +118,7 @@ export const RecipeForm = () => {
             }
 
             alert('Resep berhasil disimpan!');
+            window.location.href = '/';
             setFormData({
                 title: '',
                 categoryIds: [] as string[],
@@ -124,6 +127,7 @@ export const RecipeForm = () => {
                 time: '',
                 description: '',
                 tags: '',
+                prompt: '',
             });
         } catch (err: any) {
             alert(err.message ?? 'Terjadi error saat menyimpan resep');
@@ -158,6 +162,20 @@ export const RecipeForm = () => {
                             onChange={handleChange}
                             placeholder="Contoh: Migrasi Python 2 ke Python 3 dalam 3 Detik"
                             className="w-full bg-white/10 border border-white/20 rounded-xl p-4 text-white placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50"
+                        />
+                    </div>
+
+                    {/* Prompt */}
+                    <div>
+                        <label className="text-white font-medium flex items-center gap-2 mb-2">
+                            <FileText className="w-5 h-5 text-purple-400" /> Prompt
+                        </label>
+                        <textarea
+                            name="prompt"
+                            value={formData.prompt}
+                            onChange={handleChange}
+                            placeholder="Tuliskan prompt lengkap untuk resep ini..."
+                            className="w-full h-32 bg-white/10 border border-white/20 rounded-xl p-4 text-white resize-none placeholder-gray-400 focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-500/50"
                         />
                     </div>
 
