@@ -21,6 +21,7 @@ export const RecipeCard = ({
   onView,
   index
 }: RecipeCardProps) => {
+  console.log(recipe)
   return (
     <div className="group bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-5 sm:p-6 hover:bg-white/10 hover:border-purple-500/50 transition-all hover:shadow-xl hover:shadow-purple-500/20 hover:-translate-y-1">
       <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-3 mb-3">
@@ -54,7 +55,7 @@ export const RecipeCard = ({
       <div className="flex items-center gap-2 mb-3">
         <img
           src={
-            `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(recipe.author || 'User')}`
+            `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(recipe.profiles.display_name || 'User')}`
           }
           alt={recipe.author}
           className="w-8 h-8 rounded-full object-cover border border-white/10"
