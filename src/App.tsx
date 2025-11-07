@@ -50,6 +50,7 @@ function App() {
         description,
         estimation,
         created_at,
+        prompt,
         profiles (
           avatar_url,
           display_name

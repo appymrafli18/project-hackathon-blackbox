@@ -1,5 +1,15 @@
-import { Modal } from '../common/Modal';
-import { CheckCircle, Clock, Eye, Heart, Zap, GitBranch, Play, Bookmark, Share2 } from 'lucide-react';
+import { Modal } from "../common/Modal";
+import {
+  CheckCircle,
+  Clock,
+  Eye,
+  Heart,
+  Zap,
+  GitBranch,
+  Play,
+  Bookmark,
+  Share2,
+} from "lucide-react";
 
 interface RecipeModalProps {
   recipe: any;
@@ -14,15 +24,27 @@ export const RecipeModal = ({
   isOpen,
   isBookmarked,
   onClose,
-  onBookmark
+  onBookmark,
 }: RecipeModalProps) => {
   if (!recipe) return null;
 
   const steps = [
-    { title: 'Input ke Blackbox', desc: 'Masukkan prompt yang spesifik atau upload gambar wireframe' },
-    { title: 'Proses AI', desc: 'Blackbox AI menganalisis, menghasilkan, dan memperbaiki kode' },
-    { title: 'Output Blackbox', desc: 'Dapatkan kode yang siap digunakan dengan syntax highlighting' },
-    { title: 'Verifikasi', desc: 'Test kode dan pastikan berjalan sesuai ekspektasi' }
+    {
+      title: "Input ke Blackbox",
+      desc: "Masukkan prompt yang spesifik atau upload gambar wireframe",
+    },
+    {
+      title: "Proses AI",
+      desc: "Blackbox AI menganalisis, menghasilkan, dan memperbaiki kode",
+    },
+    {
+      title: "Output Blackbox",
+      desc: "Dapatkan kode yang siap digunakan dengan syntax highlighting",
+    },
+    {
+      title: "Verifikasi",
+      desc: "Test kode dan pastikan berjalan sesuai ekspektasi",
+    },
   ];
 
   return (
@@ -36,13 +58,15 @@ export const RecipeModal = ({
           <p className="text-gray-400 mb-3">{recipe.description}</p>
           <div className="flex items-center gap-2">
             <img
-              src={
-                `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(recipe.author || 'User')}`
-              }
+              src={`https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(
+                recipe.author || "User"
+              )}`}
               alt={recipe.author}
               className="w-8 h-8 rounded-full object-cover border border-white/10"
             />
-            <span className="text-sm text-gray-300">by {recipe.profiles.display_name || 'Unknown'}</span>
+            <span className="text-sm text-gray-300">
+              by {recipe.profiles.display_name || "Unknown"}
+            </span>
           </div>
         </div>
         <button
@@ -56,7 +80,10 @@ export const RecipeModal = ({
       {/* Tags */}
       <div className="flex flex-wrap gap-2 mb-6">
         {recipe.recipe_categories.map((tag: any, idx: number) => (
-          <span key={idx} className="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-lg">
+          <span
+            key={idx}
+            className="px-3 py-1 bg-purple-500/20 text-purple-300 text-sm rounded-lg"
+          >
             {tag.categories.name}
           </span>
         ))}
@@ -66,7 +93,9 @@ export const RecipeModal = ({
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6">
         <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
           <Clock className="w-5 h-5 text-purple-400 mx-auto mb-1" />
-          <div className="text-sm text-white font-semibold">{recipe.estimation} min</div>
+          <div className="text-sm text-white font-semibold">
+            {recipe.estimation} min
+          </div>
           <div className="text-xs text-gray-400">Duration</div>
         </div>
         <div className="bg-white/5 rounded-xl p-3 text-center border border-white/10">
@@ -101,6 +130,20 @@ export const RecipeModal = ({
 
         <div>
           <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
+            <Zap className="w-5 h-5 text-purple-400" />
+            Prompt AI
+          </h3>
+          <div className="bg-white/5 rounded-xl p-4 border border-white/10">
+            <div className="flex flex-wrap whitespace-normal items-center gap-2 text-gray-400">
+              <p className="flex-wrap font-medium w-full wrap-break-word whitespace-normal">
+                {recipe.prompt}
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-white mb-3 flex items-center gap-2">
             <GitBranch className="w-5 h-5 text-green-400" />
             Langkah-langkah
           </h3>
@@ -111,7 +154,9 @@ export const RecipeModal = ({
                   {idx + 1}
                 </div>
                 <div className="flex-1 bg-white/5 rounded-xl p-4 border border-white/10">
-                  <div className="font-semibold text-white mb-1">{step.title}</div>
+                  <div className="font-semibold text-white mb-1">
+                    {step.title}
+                  </div>
                   <p className="text-sm text-gray-400">{step.desc}</p>
                 </div>
               </div>
@@ -128,7 +173,11 @@ export const RecipeModal = ({
             onClick={() => onBookmark(recipe.id)}
             className="px-6 py-4 bg-white/5 border border-white/10 text-white rounded-xl hover:bg-white/10 transition-all flex items-center justify-center"
           >
-            <Bookmark className={`w-5 h-5 ${isBookmarked ? 'fill-yellow-400 text-yellow-400' : ''}`} />
+            <Bookmark
+              className={`w-5 h-5 ${
+                isBookmarked ? "fill-yellow-400 text-yellow-400" : ""
+              }`}
+            />
           </button>
           <button className="px-6 py-4 bg-white/5 border border-white/10 text-white rounded-xl hover:bg-white/10 transition-all flex items-center justify-center">
             <Share2 className="w-5 h-5" />
@@ -138,4 +187,3 @@ export const RecipeModal = ({
     </Modal>
   );
 };
-

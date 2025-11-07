@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import Select from 'react-select';
 import { supabase } from '../../lib/supabaseClient';
 import { Send, FileText, Tag, Clock, Star, Upload } from 'lucide-react';
+import useAuth from '../../hooks/useAuth';
 
 export const RecipeForm = () => {
     const [formData, setFormData] = useState({
@@ -14,6 +15,8 @@ export const RecipeForm = () => {
         description: '',
         tags: '',
     });
+
+    const {isAuthenticated} = useAuth();
 
     const [categories, setCategories] = useState<any[]>([]);
     const [difficulties, setDifficulties] = useState<any[]>([]);
@@ -49,6 +52,11 @@ export const RecipeForm = () => {
         e.preventDefault();
         if (!formData.title || !formData.description || formData.categoryIds.length === 0) {
             alert('Harap isi semua field wajib!');
+            return;
+        }
+
+        if (!isAuthenticated) {
+            alert('Anda harus login terlebih dahulu untuk mengirim resep.');
             return;
         }
 

@@ -1,5 +1,5 @@
-import type { Recipe } from '../../types';
-import { RecipeCard } from './RecipeCard';
+import type { Recipe } from "../../types";
+import { RecipeCard } from "./RecipeCard";
 
 interface RecipeGridProps {
   recipes: Recipe[];
@@ -16,23 +16,28 @@ export const RecipeGrid = ({
   isLiked,
   onBookmark,
   onLike,
-  onView
+  onView,
 }: RecipeGridProps) => {
   return (
     <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-      {recipes.map((recipe, idx) => (
-        <RecipeCard
-          index={idx}
-          key={recipe.id}
-          recipe={recipe}
-          isBookmarked={isBookmarked(recipe.id)}
-          isLiked={isLiked(recipe.id)}
-          onBookmark={onBookmark}
-          onLike={onLike}
-          onView={onView}
-        />
-      ))}
+      {recipes.length === 0 ? (
+        <p className="text-center col-span-full text-gray-400">
+          No recipes found.
+        </p>
+      ) : (
+        recipes.map((recipe, idx) => (
+          <RecipeCard
+            index={idx}
+            key={recipe.id}
+            recipe={recipe}
+            isBookmarked={isBookmarked(recipe.id)}
+            isLiked={isLiked(recipe.id)}
+            onBookmark={onBookmark}
+            onLike={onLike}
+            onView={onView}
+          />
+        ))
+      )}
     </div>
   );
 };
-
