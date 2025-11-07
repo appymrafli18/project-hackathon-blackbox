@@ -22,16 +22,16 @@ export const SandboxView = ({
 }: SandboxViewProps) => {
   return (
     <div className="space-y-6">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm mb-4">
+      <div className="text-center mb-8 px-2 sm:px-0">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 bg-blue-500/20 border border-blue-500/30 rounded-full text-blue-300 text-sm mb-4">
           <Terminal className="w-4 h-4" />
           <span>Interactive Playground - Try Blackbox AI in Real-Time</span>
         </div>
-        <h2 className="text-4xl font-bold text-white mb-3">Code Sandbox</h2>
-        <p className="text-gray-300">Eksperimen dengan prompts dan lihat output Blackbox AI secara langsung</p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Code Sandbox</h2>
+        <p className="text-gray-300 text-sm sm:text-base">Eksperimen dengan prompts dan lihat output Blackbox AI secara langsung</p>
       </div>
 
-      <div className="grid lg:grid-cols-2 gap-6">
+      <div className="grid gap-6 lg:grid-cols-2">
         <SandboxEditor
           code={code}
           onCodeChange={onCodeChange}

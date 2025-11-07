@@ -15,11 +15,11 @@ export const CommunityPost = ({
   onShare
 }: CommunityPostProps) => {
   return (
-    <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-6">
-      <div className="flex items-start gap-4">
+    <div className="bg-white/5 backdrop-blur-lg border border-white/10 rounded-2xl p-5 sm:p-6">
+      <div className="flex flex-col sm:flex-row sm:items-start gap-4">
         <div className="text-4xl">{post.avatar}</div>
         <div className="flex-1">
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
             <div>
               <div className="font-semibold text-white">{post.author}</div>
               <div className="text-sm text-gray-400">{post.time}</div>
@@ -32,7 +32,7 @@ export const CommunityPost = ({
               {post.recipe}
             </div>
           )}
-          <div className="flex items-center gap-4 pt-3 border-t border-white/10">
+          <div className="flex flex-wrap items-center gap-4 pt-3 border-t border-white/10">
             <button 
               onClick={() => onLike?.(post.id)}
               className="flex items-center gap-1 text-sm text-gray-400 hover:text-pink-400 transition-colors"

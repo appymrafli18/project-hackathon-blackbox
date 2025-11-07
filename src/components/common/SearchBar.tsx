@@ -12,7 +12,7 @@ export const SearchBar = ({
   onFilterClick
 }: SearchBarProps) => {
   return (
-    <div className="relative flex gap-2">
+    <div className="relative flex flex-col sm:flex-row gap-2">
       <div className="flex-1 relative">
         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
         <input
@@ -24,7 +24,7 @@ export const SearchBar = ({
       </div>
       <button 
         onClick={onFilterClick}
-        className="px-6 py-4 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl text-white hover:bg-white/20 transition-all"
+        className="px-6 py-4 bg-white/10 backdrop-blur-lg border border-white/20 rounded-2xl text-white hover:bg-white/20 transition-all flex items-center justify-center w-full sm:w-auto"
       >
         <Filter className="w-5 h-5" />
       </button>

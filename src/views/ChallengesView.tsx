@@ -15,17 +15,17 @@ export const ChallengesView = ({
 }:ChallengesViewProps) => {
   return (
     <div className="space-y-6">
-      <div className="text-center mb-8">
-        <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm mb-4">
+      <div className="text-center mb-8 px-2 sm:px-0">
+        <div className="inline-flex flex-wrap items-center justify-center gap-2 px-4 py-2 bg-yellow-500/20 border border-yellow-500/30 rounded-full text-yellow-300 text-sm mb-4">
           <Trophy className="w-4 h-4" />
           <span>Compete, Learn, and Earn Rewards!</span>
         </div>
-        <h2 className="text-4xl font-bold text-white mb-3">Weekly Challenges</h2>
-        <p className="text-gray-300">Complete challenges untuk meningkatkan skill dan mendapatkan badges</p>
+        <h2 className="text-3xl sm:text-4xl font-bold text-white mb-3">Weekly Challenges</h2>
+        <p className="text-gray-300 text-sm sm:text-base">Complete challenges untuk meningkatkan skill dan mendapatkan badges</p>
       </div>
 
       {/* User Stats */}
-      <div className="grid md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 mb-8">
         <div className="bg-linear-to-br from-purple-500/20 to-pink-500/20 backdrop-blur-lg border border-purple-500/30 rounded-2xl p-6">
           <Trophy className="w-10 h-10 text-yellow-400 mb-3" />
           <div className="text-3xl font-bold text-white mb-1">{userProgress.points}</div>
