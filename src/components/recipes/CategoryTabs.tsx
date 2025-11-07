@@ -5,7 +5,6 @@ export const CategoryTabs = ({
   activeTab, 
   onTabChange 
 }: any) => {
-  console.log(categories)
   return (
     <div className="flex gap-3 mb-8 overflow-x-auto pb-2">
       {categories.map((cat:any) => {
