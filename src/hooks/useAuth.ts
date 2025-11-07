@@ -19,7 +19,7 @@ const useAuth = () => {
     // 2. Dengarkan perubahan status auth (login/logout)
     const {
       data: { subscription },
-    } = supabase.auth.onAuthStateChange((event, session) => {
+    } = supabase.auth.onAuthStateChange((_, session) => {
       if (session) {
         // Jika statusnya SIGNED_IN
         setIsAuthenticated(true);
