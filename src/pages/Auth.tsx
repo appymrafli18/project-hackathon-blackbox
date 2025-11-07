@@ -44,7 +44,7 @@ export default function Auth() {
 
       if (error) throw error
       showSuccess('Akun berhasil dibuat! Cek email untuk verifikasi (jika diaktifkan).')
-      window.location.reload();
+      window.location.href = "/";
     } catch (err: any) {
       showError(err.message ?? 'Terjadi error')
     } finally {
