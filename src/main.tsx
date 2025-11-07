@@ -5,6 +5,7 @@ import App from './App.tsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import Auth from './pages/Auth.tsx'
 import SuccessLogin from './pages/successLogin.tsx'
+import CreateRecipe from './pages/CreateRecipe.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -13,6 +14,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/" element={<App />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/successLogin" element={<SuccessLogin />} />
+        <Route path="/create-recipe" element={<CreateRecipe />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,  
